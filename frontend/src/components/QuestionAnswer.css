@@ -1,0 +1,276 @@
+/* ============================================================
+   QuestionAnswer.css — Phase 4 Q&A panel styles
+   ============================================================ */
+
+.qa-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+
+.qa-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-text);
+}
+
+.qa-hint {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-bottom: 18px;
+}
+
+/* ── Input row ───────────────────────────────────────────── */
+.qa-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.qa-textarea {
+  flex: 1;
+  resize: vertical;
+  min-height: 72px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color 0.15s;
+}
+
+.qa-textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.qa-textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Ask button ──────────────────────────────────────────── */
+.qa-ask-btn {
+  padding: 10px 22px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s, opacity 0.15s;
+  align-self: flex-end;
+}
+
+.qa-ask-btn:hover:not(:disabled) { background: var(--color-accent-hover); }
+.qa-ask-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Spinner ─────────────────────────────────────────────── */
+.qa-spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: qa-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes qa-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Status messages ─────────────────────────────────────── */
+.qa-status {
+  margin-top: 14px;
+  padding: 11px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.qa-status.loading {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: var(--color-accent);
+}
+
+.qa-status.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.qa-status-icon { flex-shrink: 0; font-style: normal; }
+.qa-status-body { flex: 1; }
+.qa-status-body strong { display: block; margin-bottom: 3px; }
+.qa-status-body span { font-size: 12px; color: inherit; opacity: 0.85; }
+
+/* ── Section labels ──────────────────────────────────────── */
+.qa-section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+/* ── Answer box ──────────────────────────────────────────── */
+.qa-answer-section {
+  margin-top: 22px;
+}
+
+.qa-answer-box {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 6px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ── Sources ─────────────────────────────────────────────── */
+.qa-sources-section {
+  margin-top: 18px;
+}
+
+.qa-sources-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qa-source-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding: 7px 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  gap: 8px;
+}
+
+.qa-source-file {
+  color: var(--color-text);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qa-source-meta {
+  color: var(--color-muted);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Learning level selector (Phase 5) ──────────────────── */
+.qa-level-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.qa-level-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.qa-level-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.qa-level-btn {
+  padding: 5px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.qa-level-btn:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.qa-level-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.qa-level-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qa-level-desc {
+  font-size: 12px;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-left: 4px;
+}
+
+/* ── Level badge next to answer heading ─────────────────── */
+.qa-level-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  background: #eff6ff;
+  color: var(--color-accent);
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  vertical-align: middle;
+}
+
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .qa-card { padding: 20px 16px; }
+  .qa-input-row { flex-direction: column; }
+  .qa-ask-btn { width: 100%; justify-content: center; }
+  .qa-level-row { flex-direction: column; align-items: flex-start; }
+}

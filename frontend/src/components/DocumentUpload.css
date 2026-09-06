@@ -1,0 +1,182 @@
+/* ============================================================
+   DocumentUpload.css
+   ============================================================ */
+
+.upload-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.upload-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: var(--color-text);
+}
+
+/* ── Drop zone ───────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed var(--color-border);
+  border-radius: 8px;
+  padding: 36px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  background: var(--color-bg);
+  position: relative;
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+  border-color: var(--color-accent);
+  background: #eff6ff;
+}
+
+.drop-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.drop-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.drop-label {
+  font-size: 14px;
+  color: var(--color-muted);
+  margin-bottom: 6px;
+}
+
+.drop-label strong {
+  color: var(--color-accent);
+}
+
+.drop-hint {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+/* ── Selected file row ────────────────────────────────────── */
+.selected-file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.file-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-size {
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.clear-btn:hover { color: var(--color-error); background: #fef2f2; }
+
+/* ── Upload button ───────────────────────────────────────── */
+.upload-btn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 11px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.upload-btn:hover:not(:disabled) { background: var(--color-accent-hover); }
+.upload-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Status messages ─────────────────────────────────────── */
+.upload-status {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.upload-status.loading {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: var(--color-accent);
+}
+
+.upload-status.success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.upload-status.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.status-icon { flex-shrink: 0; font-style: normal; }
+
+.status-body { flex: 1; }
+.status-body strong { display: block; margin-bottom: 3px; }
+.status-body span { font-size: 12px; color: inherit; opacity: 0.85; }
+
+/* ── Spinner ─────────────────────────────────────────────── */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #bfdbfe;
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .upload-card { padding: 20px 16px; }
+  .drop-zone { padding: 28px 16px; }
+}

@@ -1,0 +1,28 @@
+# LearnSimplify AI — Backend Python dependencies
+# Install with:  pip install -r requirements.txt
+
+# Web framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# Environment variables
+python-dotenv>=1.0.1
+
+# Pydantic (FastAPI depends on this; use latest for Python 3.13 support)
+pydantic>=2.9.0
+
+# File handling
+python-multipart>=0.0.9
+
+# ── Phase 2: Document processing ────────────────────────────────────────────
+PyMuPDF>=1.24.0          # PDF text extraction
+python-docx>=1.1.0       # DOCX text extraction
+
+# ── Phase 3: RAG pipeline ────────────────────────────────────────────────────
+# Embedding model: all-MiniLM-L6-v2 (22 MB, fast, good quality, runs locally)
+sentence-transformers>=3.0.0
+faiss-cpu>=1.7.4         # Local vector similarity search
+numpy>=1.26.0
+
+# ── Phase 4: IBM Granite / watsonx.ai ────────────────────────────────────────
+requests>=2.31.0         # IBM IAM token exchange + watsonx.ai API calls

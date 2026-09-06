@@ -1,0 +1,201 @@
+/* ============================================================
+   Summarize.css — Phase 5 summarisation panel styles
+   ============================================================ */
+
+.sum-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+
+.sum-card h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-text);
+}
+
+.sum-hint {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-bottom: 18px;
+}
+
+/* ── Length selector ─────────────────────────────────────── */
+.sum-length-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.sum-length-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.sum-length-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sum-length-btn {
+  padding: 5px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.sum-length-btn:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.sum-length-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.sum-length-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sum-length-desc {
+  font-size: 12px;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-left: 4px;
+}
+
+/* ── Summarise button ────────────────────────────────────── */
+.sum-btn {
+  padding: 10px 22px;
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.sum-btn:hover:not(:disabled) { background: #6d28d9; }
+.sum-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Spinner ─────────────────────────────────────────────── */
+.sum-spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: sum-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes sum-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Status messages ─────────────────────────────────────── */
+.sum-status {
+  margin-top: 14px;
+  padding: 11px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.sum-status.loading {
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  color: #7c3aed;
+}
+
+.sum-status.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.sum-status-icon { flex-shrink: 0; font-style: normal; }
+.sum-status-body { flex: 1; }
+.sum-status-body strong { display: block; margin-bottom: 3px; }
+.sum-status-body span { font-size: 12px; color: inherit; opacity: 0.85; }
+
+/* ── Result section ──────────────────────────────────────── */
+.sum-result-section { margin-top: 22px; }
+
+.sum-section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sum-result-box {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid #7c3aed;
+  border-radius: 6px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ── Length badge ────────────────────────────────────────── */
+.sum-length-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  background: #f5f3ff;
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  vertical-align: middle;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .sum-card { padding: 20px 16px; }
+  .sum-btn { width: 100%; justify-content: center; }
+  .sum-length-row { flex-direction: column; align-items: flex-start; }
+}
