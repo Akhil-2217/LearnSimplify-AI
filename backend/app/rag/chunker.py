@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 # ── Configurable constants ────────────────────────────────────────────────────
 CHUNK_SIZE = 1000      # target characters per chunk
 CHUNK_OVERLAP = 150    # characters of overlap between consecutive chunks
-MIN_CHUNK_SIZE = 50    # chunks smaller than this are discarded
+MIN_CHUNK_SIZE = 20    # chunks smaller than this are discarded
 
 
 @dataclass

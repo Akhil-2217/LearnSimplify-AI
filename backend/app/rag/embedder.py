@@ -1,14 +1,8 @@
 """
-embedder.py — Phase 3 local embedding generation.
+embedder.py — Local embedding generation.
 
 Model: all-MiniLM-L6-v2
-  - 22 MB on disk
-  - 384-dimensional output vectors
-  - Fast on CPU, good semantic quality for retrieval
-  - Runs entirely locally — no external API required
-
-The SentenceTransformer is loaded once (module-level singleton) so it is
-not re-initialised on every request.
+384-dimensional embeddings.
 """
 
 from __future__ import annotations
@@ -16,48 +10,40 @@ from __future__ import annotations
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-# ── Model selection ────────────────────────────────────────────────────────────
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
-EMBEDDING_DIM = 384  # fixed output dimension for this model
+EMBEDDING_DIM = 384
 
-# ── Singleton ──────────────────────────────────────────────────────────────────
-# _model is None until the first call to get_model() — lazy loading.
 _model: SentenceTransformer | None = None
 
 
 def get_model() -> SentenceTransformer:
-    """Return the singleton SentenceTransformer, loading it on first call."""
+    """Return the singleton model, loading it only once."""
     global _model
+
     if _model is None:
         _model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+
     return _model
 
 
 def embed_texts(texts: list[str]) -> np.ndarray:
-    """
-    Embed a list of strings.
-
-    Returns a float32 numpy array of shape (len(texts), EMBEDDING_DIM).
-    Vectors are L2-normalised so that dot-product == cosine similarity.
-    """
+    """Generate normalized 384-dimensional embeddings."""
     if not texts:
         return np.empty((0, EMBEDDING_DIM), dtype=np.float32)
 
     model = get_model()
-    # encode returns (N, 384) float32; normalize_embeddings=True → unit vectors
-    embeddings: np.ndarray = model.encode(
+
+    embeddings = model.encode(
         texts,
         convert_to_numpy=True,
         normalize_embeddings=True,
         show_progress_bar=False,
+        batch_size=8,
     )
+
     return embeddings.astype(np.float32)
 
 
 def embed_query(question: str) -> np.ndarray:
-    """
-    Embed a single query string.
-
-    Returns a shape-(1, EMBEDDING_DIM) float32 array.
-    """
+    """Generate an embedding for a single question."""
     return embed_texts([question])

@@ -49,7 +49,7 @@ async function request(method, path, body = null) {
   } catch {
     // Network-level failure (backend not running, DNS error, etc.)
     throw new Error(
-      'Could not reach the backend. Make sure the FastAPI server is running on port 8000.',
+  'Could not reach the LearnSimplify AI server. Please try again in a moment.',
     )
   }
 
