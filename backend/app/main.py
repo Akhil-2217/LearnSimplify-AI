@@ -80,3 +80,7 @@ app.include_router(
     conversation_router,
     prefix="/api",
 )
+
+@app.post("/api/test-post")
+def test_post():
+    return {"status": "POST works"}
