@@ -5,7 +5,7 @@
  * API keys are NEVER sent from the frontend — they live only in backend/.env.
  */
 
-const BASE = '/api'
+const BASE = 'https://learnsimplify-ai.onrender.com/api'
 
 /**
  * Map HTTP status codes to friendly user-facing messages for common errors.
