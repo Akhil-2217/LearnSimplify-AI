@@ -43,15 +43,16 @@ async function request(method, path, body = null) {
     options.body = body
   }
 
-  let res
   try {
     res = await fetch(`${BASE}${path}`, options)
-  } catch {
-    // Network-level failure (backend not running, DNS error, etc.)
+} catch (err) {
+    console.error('API request failed:', err)
+    console.error('Request URL:', `${BASE}${path}`)
+
     throw new Error(
-  'Could not reach the LearnSimplify AI server. Please try again in a moment.',
+        `Could not reach the backend: ${err?.message || 'Network error'}`
     )
-  }
+}
 
   if (!res.ok) {
     let serverDetail = `HTTP ${res.status}`
