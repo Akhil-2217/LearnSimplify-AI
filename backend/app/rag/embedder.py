@@ -1,7 +1,7 @@
 """
 embedder.py — Lightweight embedding generation.
 
-Model: all-MiniLM-L6-v2
+Model: BAAI/bge-small-en-v1.5
 384-dimensional embeddings.
 """
 
@@ -10,7 +10,7 @@ from __future__ import annotations
 import numpy as np
 from fastembed import TextEmbedding
 
-EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL_NAME = "BAAI/bge-small-en-v1.5"
 EMBEDDING_DIM = 384
 
 _model: TextEmbedding | None = None
@@ -23,7 +23,7 @@ def get_model() -> TextEmbedding:
     if _model is None:
         _model = TextEmbedding(
             model_name=EMBEDDING_MODEL_NAME,
-            batch_size=8,
+            threads=1,
         )
 
     return _model
@@ -37,11 +37,10 @@ def embed_texts(texts: list[str]) -> np.ndarray:
     model = get_model()
 
     embeddings = np.asarray(
-        list(model.embed(texts)),
+        list(model.embed(texts, batch_size=1)),
         dtype=np.float32,
     )
 
-    # Normalize vectors for cosine similarity / FAISS inner product.
     norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
     embeddings = embeddings / np.maximum(norms, 1e-12)
 
