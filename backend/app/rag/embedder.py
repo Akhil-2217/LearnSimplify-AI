@@ -1,5 +1,5 @@
 """
-embedder.py — Local embedding generation.
+embedder.py — Lightweight embedding generation.
 
 Model: all-MiniLM-L6-v2
 384-dimensional embeddings.
@@ -8,20 +8,23 @@ Model: all-MiniLM-L6-v2
 from __future__ import annotations
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
 
-EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
+EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 EMBEDDING_DIM = 384
 
-_model: SentenceTransformer | None = None
+_model: TextEmbedding | None = None
 
 
-def get_model() -> SentenceTransformer:
-    """Return the singleton model, loading it only once."""
+def get_model() -> TextEmbedding:
+    """Return the singleton embedding model."""
     global _model
 
     if _model is None:
-        _model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+        _model = TextEmbedding(
+            model_name=EMBEDDING_MODEL_NAME,
+            batch_size=8,
+        )
 
     return _model
 
@@ -33,17 +36,18 @@ def embed_texts(texts: list[str]) -> np.ndarray:
 
     model = get_model()
 
-    embeddings = model.encode(
-        texts,
-        convert_to_numpy=True,
-        normalize_embeddings=True,
-        show_progress_bar=False,
-        batch_size=8,
+    embeddings = np.asarray(
+        list(model.embed(texts)),
+        dtype=np.float32,
     )
+
+    # Normalize vectors for cosine similarity / FAISS inner product.
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    embeddings = embeddings / np.maximum(norms, 1e-12)
 
     return embeddings.astype(np.float32)
 
 
 def embed_query(question: str) -> np.ndarray:
-    """Generate an embedding for a single question."""
+    """Generate an embedding for a single query."""
     return embed_texts([question])
