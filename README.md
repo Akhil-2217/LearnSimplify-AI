@@ -1,5 +1,10 @@
 # LearnSimplify AI
 
+## 🚀 Live Demo
+
+👉 **[Open LearnSimplify AI](https://akhil-2217.github.io/LearnSimplify-AI/)**
+
+**GitHub Repository:** https://github.com/Akhil-2217/LearnSimplify-AI
 > **AICTE-2026 Problem Statement No. 19**  
 > AI-Powered Course Content Simplification Agent
 
